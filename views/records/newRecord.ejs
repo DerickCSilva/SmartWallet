@@ -1,0 +1,41 @@
+<%- include ('../partials/head.ejs') %>
+    <div id="header-area" style="margin-bottom: 76px">
+        <%- include ('../partials/header.ejs') %>
+            <!-- Start articles section CSS: news.css -->
+            <article>
+                <section>
+                    <h2>Novo Registro</h2>
+                    <form action="/new/record" method="post">
+                        <label for="category">Categoria:</label>
+                        <% if(noCategory) { %>
+                            <span class="no">Sem categorias registradas, crie sua primeira categoria clicando <a href="/new/category">aqui</a>!</span>
+                        <% } else { %>
+                            <select name="category" id="category" onclick="showItemsByCategory(<%= allItems, ids %>)"
+                                required>
+                                <option disabled selected value="">Selecione abaixo</option>
+                                <% categories.forEach(category=> { %>
+                                    <option value="<%= category.id - 1 %>">
+                                        <%= category.name %>
+                                    </option>
+                                    <% }); %>
+                            </select>
+                        <% } %>
+                        
+                        <label for="item">Item:</label>
+                        <span id="no" class="no" style="display: none;">Sem itens criados para essa categoria, crie seu primeiro item clicando <a href="/new/item">aqui</a>!</span>
+                        <select name="item" id="item" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                        </select>
+                        <label for="value">Valor:</label>
+                        <input type="number" id="value" name="value" placeholder="Apenas números" step=".01" required>
+                        <label for="desc">Descrição:</label>
+                        <input type="text" id="desc" name="desc" placeholder="Breve descrição" maxlength="100" required>
+                        <label for="date_record" class="space-right">Data: (Obs: Registre pelo menos o mês e o ano certo!)</label>
+                        <input type="date" name="date_record" id="date_record" required>
+                        <input type="submit" value="Registrar">
+                    </form>
+                </section>
+            </article>
+            <!-- Fim articles section CSS: news.css -->
+    </div>
+    <%- include ('../partials/footer.ejs') %>

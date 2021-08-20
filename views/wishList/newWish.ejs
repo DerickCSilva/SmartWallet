@@ -1,0 +1,37 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area" style="margin-bottom: 76px">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start articles section CSS: news.css -->
+            <article>
+                <div id="button">
+                    <a href="/wishlist/page/1">Ver todos os itens</a>
+                </div>
+                <section>
+                    <h2>Novo Item da Lista de Desejo</h2>
+                    <form action="/new/wish" method="post">
+                        <label for="situation">Situação:</label>
+                        <select name="situation" id="situation" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <option value="adquirido">Adquirido</option>
+                            <option value="pendente">Pendente</option>
+                        </select>
+                        <label for="degree">Grau:</label>
+                        <select name="degree" id="degree" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <label for="item">Nome do Item:</label>
+                        <input type="text" id="item" name="item" required>
+                        <label for="value">Valor:</label>
+                        <input type="number" id="value" name="value" step=".01" placeholder="Apenas números">
+                        <label for="store">Loja onde Adquiriu:</label>
+                        <input type="text" id="store" name="store">
+                        <input type="submit" value="Registrar">
+                    </form>
+                </section>
+            </article>
+            <!-- Fim articles section CSS: news.css -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

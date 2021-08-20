@@ -1,0 +1,110 @@
+/***************************************
+Formatações Gerais das telas de novos */
+article {
+    width: 90%;
+    margin: 0 auto;
+}
+
+article div#button {
+    position: static;
+    width: 64%;
+    margin: 50px auto -20px auto;
+}
+
+article div#button a {
+    background-color: #0040FF;
+    color: #fff;
+    border: 2px solid #0B0B3B;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 5px 15px;
+    opacity: 0.8;
+    transition: .4s;
+}
+
+article div#button a:hover {
+    color: #0040FF;
+    background-color: #fff;
+    text-decoration: underline;
+}
+
+article section {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #BDBDBD;
+    width: 60%;
+    margin: 5% auto;
+    padding: 20px;
+}
+
+article section h2 {
+    border-bottom: 5px solid #08298A;
+    border-radius: 5px;
+    padding-bottom: 5px;
+}
+
+article div#table-area td a {
+    color: #000;
+    text-decoration: none;
+}
+
+article section form {
+    margin-top: 3%;
+}
+
+article section form label {
+    font-size: 20px;
+    font-style: italic;
+    display: block;
+}
+
+article section form input[type="text"],
+article section form input[type="number"],
+article section form input[type="date"]{
+    padding-left: 10px;
+    border: 1px solid #0080FF;
+    width: 98%;
+    line-height: 30px;
+    margin-bottom: 30px;
+}
+
+article section form input[type="submit"] {
+    background-color: #088A08;
+    border: 2px solid #0B3C00;
+    color: #fff;
+    font-size: 20px;
+    padding: 5px 15px;
+    transition: .4s;
+} 
+
+article section form input[type="submit"]:hover {
+    text-decoration: underline;
+    color: #088A08;
+    background-color: #fff;
+} 
+
+article section form select {
+    border: 1px solid #0080FF;
+    width: 99.7%;
+    height: 30px;
+    margin-bottom: 30px;
+}
+
+span.no {
+    display: block;
+    padding: 15px 0 20px 0;
+    font-size: 18px;
+    font-style: italic;
+}
+
+span.no a {
+    color: #0040FF;
+    transition: .4s;
+    text-decoration: none;
+}
+
+span.no a:hover {
+    color: #0B0B3B;
+    opacity: 0.8;
+    text-decoration: underline;
+}

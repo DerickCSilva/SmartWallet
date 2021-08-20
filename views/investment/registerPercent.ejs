@@ -1,0 +1,28 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area" style="margin-bottom: 76px">
+            <%- include ('../partials/header.ejs') %>
+            <section id="buttons">
+                <a href="/new/investment">Criar um investimento</a>
+                <a href="/view/investment">Visualizar investimentos</a>
+            </section>
+            <article>
+                <section>
+                    <h2>Registrar o percentual do mês</h2>
+                    <form action="/new/percent" method="post">
+                        <label for="investment">Nome:</label>
+                        <select id="investment" name="investment" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <% investments.forEach(investment => { %>
+                                <option value="<%= investment.id %>"><%= investment.name %></option>
+                            <% }); %>
+                        </select>
+                        <label for="date">Mês:</label>
+                        <input type="month" name="date" id="date" required> <!-- CSS: investment.css  -->
+                        <label for="percent">Porcentagem:</label>
+                        <input type="number" id="percent" placeholder="Apenas o número" name="percent" required>
+                        <input type="submit" value="Registrar">
+                    </form>
+                </section>
+            </article>
+        </div>
+        <%- include ('../partials/footer.ejs') %>

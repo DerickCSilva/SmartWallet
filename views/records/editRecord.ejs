@@ -1,0 +1,48 @@
+<%- include ('../partials/head.ejs') %>
+    <div id="header-area" style="margin-bottom: 76px">
+        <%- include ('../partials/header.ejs') %>
+            <!-- Start articles section CSS: news.css -->
+            <article>
+                <section>
+                    <h2>Editar Registro</h2>
+                    <form action="/update/record" method="post">
+                        <input type="text" name="id" id="id" hidden value="<%= record.id %>">
+                        <label for="category">Categoria:</label>
+                            <select name="category" id="category" onclick="showItemsByCategory(<%= allItems, ids %>)"
+                                required>
+                                <option disabled selected value="">Selecione abaixo</option>
+                                <% categories.forEach(category=> { %>
+                                    <% if(category.id == record.categoryId) { %>
+                                        <option selected value="<%= category.id - 1 %>">
+                                            <%= category.name %>
+                                        </option>
+                                    <% } else { %>
+                                        <option value="<%= category.id - 1 %>">
+                                            <%= category.name %>
+                                        </option>
+                                    <% } %>
+                                <% }); %>
+                            </select>
+                        
+                        <label for="item">Item:</label>
+                        <span id="no" class="no" style="display: none;">Sem itens criados para essa categoria, crie seu primeiro item clicando <a href="/new/item">aqui</a>!</span>
+                        <select name="item" id="item" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <option selected value="<%= record.item %>">
+                                <%= record.item %>
+                            </option>
+                        </select>
+                        <label for="value">Valor:</label>
+                        <input value="<%= record.value %>" type="number" id="value" name="value" placeholder="Apenas números" step=".01" required>
+                        <label for="desc">Descrição:</label>
+                        <input value="<%= record.desc %>" type="text" id="desc" name="desc" placeholder="Breve descrição" maxlength="100" required>
+                        <label for="date_record" class="space-right">Data: (Obs: Registre pelo menos o mês certo!)</label>
+                        <input value="<%= record.date %>" type="date" name="date_record" id="date_record" required>
+                        <input type="submit" value="Editar">
+                    </form>
+                </section>
+            </article>
+            <!-- Fim articles section CSS: news.css -->
+
+    </div>
+    <%- include ('../partials/footer.ejs') %>

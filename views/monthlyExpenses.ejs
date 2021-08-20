@@ -1,0 +1,88 @@
+<%- include ('./partials/head.ejs') %>
+<link rel="stylesheet" href="../../css/monthlyExpenses.css">
+        <div id="header-area">
+            <%- include ('./partials/header.ejs') %>
+            <article>
+                <div id="data" style="margin-left: -215px;">
+                    <h3>Consultar por Ano</h3>
+                    <form action="/monthlyExpenses" method="post">
+                        <div>
+                            <label for="year">Ano:</label>
+                            <input style="padding-left: 10px;" type="number" name="year" id="year" minlength="4" maxlength="4" required>
+                            <input type="submit" value="Buscar">
+                        </div>
+                    </form>
+                </div>
+            </article>
+            <div style="clear: both;"></div>
+            <!-- Start Spent Area monthlyExpenses.css -->
+            <% if(justInput) { %>
+                <article id="spent-area" style="margin-top: 80px;">
+                    <h2>Digite o ANO que quer consultar na caixa acima!</h2>
+                </article>
+                <div style="margin-bottom: 171px;"></div>
+            <% } else { %>
+                <article id="spent-area">
+                    <h2>Primeiro semestre de <%= year %></h2>
+                    <article>
+                        <section>
+                            <h3>Janeiro</h3>
+                            <span><%= valuesByDate['01'] %></span>
+                        </section>
+                        <section>
+                            <h3>Fevereiro</h3>
+                            <span><%= valuesByDate['02'] %></span>
+                        </section>
+                        <section>
+                            <h3>Março</h3>
+                            <span><%= valuesByDate['03'] %></span>
+                        </section>
+                        <section>
+                            <h3>Abril</h3>
+                            <span><%= valuesByDate['04'] %></span>
+                        </section>
+                        <section>
+                            <h3>Maio</h3>
+                            <span><%= valuesByDate['05'] %></span>
+                        </section>
+                        <section>
+                            <h3>Junho</h3>
+                            <span><%= valuesByDate['06'] %></span>
+                        </section>
+                    </article>
+                    <h2>Segundo semestre de <%= year %></h2>
+                    <article>
+                        <section>
+                            <h3>Julho</h3>
+                            <span><%= valuesByDate['07'] %></span>
+                        </section>
+                        <section>
+                            <h3>Agosto</h3>
+                            <span><%= valuesByDate['08'] %></span>
+                        </section>
+                        <section>
+                            <h3>Setembro</h3>
+                            <span><%= valuesByDate['09'] %></span>
+                        </section>
+                        <section>
+                            <h3>Outubro</h3>
+                            <span><%= valuesByDate['10'] %></span>
+                        </section>
+                        <section>
+                            <h3>Novembro</h3>
+                            <span><%= valuesByDate['11'] %></span>
+                        </section>
+                        <section>
+                            <h3>Dezembro</h3>
+                            <span><%= valuesByDate['12'] %></span>
+                        </section>
+                    </article>
+                    <div>
+                        <h2>Total Gastos Anual</h2>
+                        <span><%= annualExpenses %></span>
+                    </div>
+                </article>
+            <% } %>
+            <!-- End Spent Area -->
+        </div>
+        <%- include ('./partials/footer.ejs') %>

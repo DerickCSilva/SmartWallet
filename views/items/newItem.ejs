@@ -1,0 +1,27 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area" style="margin-bottom: 83px">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start articles section CSS: news.css -->
+            <article>
+                <div id="button">
+                    <a href="/items/page/1">Ver todos os itens</a>
+                </div>
+                <section>
+                    <h2>Novo Item</h2>
+                    <form action="/new/item" method="post">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" required>
+                        <label for="category">Categoria:</label>
+                        <select name="category" id="category" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <% categories.forEach(category => { %>
+                                <option value="<%= category.id %>"><%= category.name %></option>
+                            <% }); %>
+                        </select>
+                        <input type="submit" value="Registrar">
+                    </form>
+                </section>
+            </article>
+            <!-- Fim articles section CSS: news.css -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

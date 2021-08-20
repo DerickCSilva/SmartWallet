@@ -1,0 +1,50 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area" style="margin-bottom: 76px">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start articles section CSS: news.css -->
+            <article>
+                <section>
+                    <h2>Editar Item da Lista de Desejo</h2>
+                    <form action="/update/wish" method="post">
+                        <input type="text" name="id" id="id" hidden value="<%= wish.id %>">
+                        <label for="situation">Situação:</label>
+                        <select name="situation" id="situation" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <% if(wish.situation === 'adquirido') { %>
+                                <option selected value="adquirido">Adquirido</option>
+                                <option value="pendente">Pendente</option>
+                            <% } else { %>
+                                <option value="adquirido">Adquirido</option>
+                                <option selected value="pendente">Pendente</option>
+                            <% } %>
+                        </select>
+                        <label for="degree">Grau:</label>
+                        <select name="degree" id="degree" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <% if(wish.degree === '1') { %>
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            <% } else if(wish.degree === '2') { %>
+                                <option value="1">1</option>
+                                <option selected value="2">2</option>
+                                <option value="3">3</option>
+                            <% } else { %>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option selected value="3">3</option>
+                            <% } %>
+                        </select>
+                        <label for="item">Nome do Item:</label>
+                        <input type="text" id="item" name="item" required value="<%= wish.item %>">
+                        <label for="value">Valor:</label>
+                        <input type="number" id="value" name="value" step=".01" value="<%= wish.value %>" placeholder="Apenas números">
+                        <label for="store">Loja onde Adquiriu:</label>
+                        <input type="text" id="store" name="store" value="<%= wish.store %>">
+                        <input type="submit" value="Editar">
+                    </form>
+                </section>
+            </article>
+            <!-- Fim articles section CSS: news.css -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

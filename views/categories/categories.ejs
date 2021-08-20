@@ -1,0 +1,60 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start select#buttons CSS: investment.css -->
+            <section id="buttons">
+                <a href="/new/category">Nova categoria</a>
+            </section>
+            <!-- Fim select#buttons CSS: investment.css -->
+            
+            <!-- Start article#total-area CSS: style.css -->
+            <article style="width: 100%; margin-bottom: 20px;" id="total-area">
+                <aside>
+                    <section style="margin: 0;">
+                        <h3>Todas as categorias ao lado</h3>
+                    </section>
+                </aside>
+                <div id="table-area" style="flex-grow: 12;">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Pré/Pós</th>
+                            <th>Ações</th>
+                        </tr>
+                        <% categories.forEach(category => { %>
+                            <tr>
+                                <td><%= category.id %></td>
+                                <td><%= category.name %></td>
+                                <td style="text-transform: capitalize;"><%= category.type %></td>
+                                <td style="text-transform: capitalize;"><%= category.pre_pos %></td>
+                                <td>
+                                    <a class="edit" href="/edit/category/<%= category.id %>">Editar</a>
+                                    <form method="post" action="/delete/category" style="display: inline;" onsubmit="confirmDeletion(event, this)">
+                                        <input type="hidden" name="id" value="<%= category.id %>">
+                                        <input type="submit" class="delete" value="Deletar">
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </table>
+                </div>
+            </article>
+            <div class="pagination" style="width: 80%; margin: 0 0 100px 235px;">
+                <% if(num > 1) { %>
+                    <form id="form" action="/categories/page/<%= num - 1 %>" method="get">
+                        <input id="sub" style="float: left;" type="submit" value="<<< Anterior">
+                    </form>
+                <% } %>
+
+                <% if(next) { %>
+                    <form id="form" action="/categories/page/<%= num + 1 %>" method="get">
+                        <input id="sub" style="float: right;" type="submit" value="Próximo >>>">
+                    </form>
+                <% } %>
+            </div>
+            <div style="clear: both;"></div>
+            <!-- Fim article#total-area CSS: style.css -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

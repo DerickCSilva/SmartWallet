@@ -1,0 +1,94 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start select#buttons CSS: investment.css -->
+            <section id="buttons">
+                <a href="/new/investment">Criar um investimento</a>
+                <a href="/new/percent">Registrar porcentagem</a>
+                <a href="/view/investment">Visualizar investimentos</a>
+            </section>
+            <!-- Fim select#buttons CSS: investment.css -->
+            
+            <!-- Start article#total-area CSS: style.css -->
+            <article id="total-area" style="width: 100%;">
+                <aside>
+                    <section style="margin: 0;">
+                        <h3>Total Investido</h3>
+                        <span class="green"><%= formatMoney(totalInvested) %></span>
+                    </section>
+                </aside>
+                <div id="table-area" style="flex-grow: 12; margin-bottom: 40px;">
+                    <% if(noContent) { %>
+                        <h2 id="noContent">Nenhum registro de investimentos!</h2>
+                    <% } else { %>
+                        <table>
+                            <tr>
+                                <th>Data</th>
+                                <% investments.forEach(investment => { %>
+                                    <th><%= investment.name %></th>
+                                <% }); %>
+                            </tr>
+                            <% Object.keys(percentsByMonth).forEach((item) => { %>
+                                <% if (percentsByMonth[item].length > 6) { %>
+                                    <% for(let i = 0; i < percentsByMonth[item].length; i++) { %>
+                                        <% if(percentsByMonth[item][i]) { %>
+                                            <tr>
+                                                <td><%= getMonthYear(item) %></td>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% } %>
+
+                                <% } else { %>
+                                    <% for(let i = 0; i < percentsByMonth[item].length; i++) { %>
+                                        <% if(percentsByMonth[item][i]) { %>
+                                            <tr>
+                                                <td><%= getMonthYear(item) %></td>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                                <% i++ %>
+                                                <td><%= formatMoney(percentsByMonth[item][i]) %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            <% }); %>
+                            
+                            <% valuesByInvestment.forEach(value => { %>
+                                <% for(let i = 0; i < valuesByInvestment.length; i++) { %>
+                                        <tr style="background-color: #ccc; font-weight: bold;">
+                                            <td>Total</td>
+                                            <td><%= formatMoney(valuesByInvestment[0][i]) %></td>
+                                            <% i++ %>
+                                            <td><%= formatMoney(valuesByInvestment[0][i]) %></td>
+                                            <% i++ %>
+                                            <td><%= formatMoney(valuesByInvestment[0][i]) %></td>
+                                            <% i++ %>
+                                            <td><%= formatMoney(valuesByInvestment[0][i]) %></td>
+                                            <% i++ %>
+                                            <td><%= formatMoney(valuesByInvestment[0][i]) %></td>
+                                        </tr>
+                                <% } %>
+                            <% }); %>
+                        </table>
+                    <% } %>
+                </div>
+            </article>
+            <!-- Fim article#total-area CSS: style.css -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

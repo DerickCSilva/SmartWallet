@@ -1,0 +1,30 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start articles section CSS: news.css -->
+            <article>
+                <section>
+                    <h2>Editar Categoria</h2>
+                    <form action="/update/category" method="post">
+                        <input type="text" name="id" id="id" hidden value="<%= category.id %>"> 
+                        <label for="name">Nome:</label>
+                        <input value="<%= category.name %>" type="text" name="name" required id="name">
+                        <label for="tipo">Tipo:</label>
+                        <select name="type" id="type" onclick="byType()" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <option value="receita">Receita</option>
+                            <option value="gastos">Gastos</option>
+                        </select>
+                        <label for="pre_pos">Pré/Pós Investimento:</label>
+                        <select name="pre_pos" id="pre_pos" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <option value="pre">Pré Investimentos</option>
+                            <option value="pos">Pós Investimentos</option>
+                        </select>
+                        <input type="submit" value="Editar">
+                    </form>
+                </section>
+            </article>
+            <!-- Fim articles section CSS: news.css -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

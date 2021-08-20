@@ -1,0 +1,54 @@
+/************************************************
+Formatação apenas da <article id="spent-area">*/
+article#spent-area {
+    min-width: 1200px;
+    max-width: 1200px;
+}
+
+article#spent-area h2 {
+    text-align: center;
+    padding: 25px;
+}
+
+article#spent-area div span {
+    display: block;
+    text-align: center;
+    font-size: 26px;
+    font-style: italic;
+    color: green;
+    text-decoration: underline;
+    margin-bottom: 5%;
+}
+
+article#spent-area article {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+article#spent-area article section{
+    text-align: center;
+    background-color: #ccc;
+    border: 2px solid #2E2E2E;
+    width: 130px;
+    padding: 20px 20px 30px 15px;
+    margin: 0 5px 20px 5px;
+}
+
+article#spent-area article section:hover {
+    background-color: gray;
+    border: 2px solid #585858;
+    color: #fff;
+}
+
+article#spent-area article section span {
+    position: relative;
+    top: 10px;
+    font-size: 20px;
+    color: blue;
+    font-style: italic;
+}
+
+input[type="number"] {
+    line-height: 20px;
+}

@@ -1,0 +1,362 @@
+/**********************
+Formatações gerais */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #D8D8D8;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/**********************
+Cabeçalho */
+#container {
+    height: 100px;
+    background-color: #0040FF;
+}
+
+#header-area {
+    margin: 0 auto;
+    width: 90%;
+    min-width: 900px;
+    max-width: 1200px;
+}
+
+header {
+    height: 100px;
+}
+
+header img {
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    top: 15px;
+    width: 175px;
+}
+
+/**********************
+Barra de navegação */
+nav#nav-header {
+    position: relative;
+    top: 25%;
+    float: right;
+}
+
+nav#nav-header ul#options-header {
+    list-style: none;
+    float: left;
+}
+
+nav#nav-header ul#options-header li {
+    float: left;
+    border-right: 1px solid #0080FF;
+    border-left: 1px solid #0B0B3B;
+}
+
+nav#nav-header ul#options-header a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: .4s;
+    /* border: 1px solid red; */
+}
+
+nav#news {
+    display: none;
+    width: 20%;
+    height: 100px;
+    padding-top: 74px;
+    margin-top: -3%;
+    margin-left: 75%;
+    padding-left: 10%;
+}
+
+nav#news ul {
+    margin-left: 15%;
+    list-style: none;
+    width: fit-content;
+    background-color: #fff;
+    border: 1px solid #0B0B3B;
+    border-radius: 5px;
+}
+
+nav#news ul a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    line-height: 25px;
+    padding: 4px 15px;
+    text-indent: -5px;
+}
+
+nav#news ul a:hover {
+    color: #0040FF;
+    text-decoration: underline;
+}
+
+/* Remover bordas das navegações das extremidades */
+nav#nav-header ul#options-header li.left-border {
+    border-left: none;
+}
+
+nav#nav-header ul#options-header li.right-border {
+    border-right: none;
+}
+
+nav#nav-header ul#options-header a:hover {
+    color: #0B0B3B;
+    text-decoration: underline;
+    margin-top: -5px;
+    transition: .4s;
+}
+
+i.right {
+    margin-right: 5px;
+}
+
+/**********************
+Área total */
+article div#data {
+    position: relative;
+    left: 220px;
+    margin-top: 50px;
+    float: left;
+}
+
+article div#data h3 {
+    width: 270px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+article div#showDate {
+    border-bottom: 2px solid #0B0B3B;
+    box-shadow: 10px 10px 10px #01A9DB; 
+    float: right;
+    padding: 10px;
+    position: absolute;
+    right: 10%;
+    top: 200px;
+}
+
+label.space-right {
+    margin-right: 7px;
+}
+
+article div#data label {
+    text-transform: uppercase;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+input[type="text"] {
+    padding-left: 5px;
+    height: 25px; 
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+    padding: 50px;
+    border: 1px solid red;
+}
+
+input[type="date"] {
+    border: 1px solid #0B0B3B;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    height: 25px; 
+}
+
+article div#data input[type="submit"] {
+    background-color: #0040FF;
+    color: #fff;
+    border: 2px solid #0B0B3B;
+    padding: 3px 15px;
+    transition: .4s;
+}
+
+article div#data input[type="submit"]:hover {
+    color: #0040FF;
+    background-color: #fff;
+    text-decoration: underline;
+}
+
+div#data label#title {
+    text-transform: none;
+    display: block;
+    margin-bottom: 3px;
+}
+
+/**********************
+Barra lateral */
+article#total-area {
+    display: flex;
+    margin-top: 2%;
+}
+
+article#total-area aside {
+    flex-grow: 1;
+}
+
+article aside section {
+    text-align: center;
+    background-color: #ccc;
+    border: 2px solid #2E2E2E;
+    border-radius: 5px;
+    width: 150px;
+    padding: 20px 20px 30px 15px;
+    margin: 0 0 20px;
+}
+
+article#total-area aside section:hover {
+    background-color: gray;
+    border: 2px solid #585858;
+}
+
+article aside section span {
+    position: relative;
+    top: 10px;
+    font-size: 20px;
+}
+
+.green {
+    color: green;
+}
+
+.lightgreen {
+    color: #088A29;
+}
+
+.red {
+    color: red;
+}
+
+.category {
+    font-style: italic;
+    font-weight: bold; 
+}
+
+/**********************
+Área Tabela */
+div#table-area {
+    min-width: max-content;
+    flex-grow: 12;
+    margin-left: 30px;
+}
+
+div#table-area table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+div#table-area table th,
+div#table-area table td {
+    padding: 10px;
+    border-bottom: 1px solid #000;
+}
+
+div#table-area table tr:hover {
+    background-color: #ccc;
+}
+
+div#table-area table th {
+    background-color: #ccc;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 90%;
+}
+
+div#table-area table td a,
+div#table-area table td input {
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+div#table-area table td input {
+    padding-top: 5.8px;
+}
+
+div#table-area table td a.edit {
+    background-color: #D7DF01;
+}
+
+div#table-area table td .delete  {
+    background-color: #FE2E2E;
+}
+
+div#table-area table td a.edit:hover,
+div#table-area table td .delete:hover {
+    text-decoration: underline;
+}
+
+div#table-area table td a.edit:active,
+div#table-area table td .delete:active {
+    color: #2E2E2E;
+}
+
+td.no-record {
+    text-align: center;
+    font-size: 20px;
+}
+
+td.no-record a#here {
+    border: none;
+    color: #0040FF;
+    transition: .4s;
+    text-decoration: underline;
+}
+
+td.no-record a#here:hover {
+    font-style: italic;
+    color: #696CF7;
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+div.pagination {
+    height: calc(100vh - 500px);
+    width: 95%;
+    margin: 10px auto;
+}
+
+div.pagination a {
+    color: #0000FF;
+    text-transform: uppercase;
+}
+
+div.pagination a:hover {
+    color: #084B8A;
+    font-style: italic;
+}
+
+form#form input#sub {
+    float: right;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    font-size: 25px;
+    color: #0040FF;
+}
+
+form#form input#sub:hover {
+    font-style: italic;
+    cursor: pointer;
+    color: #084B8A;
+}
+
+/**********************
+Rodapé */
+
+footer {
+    background-color: #0040FF;
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+    font-size: 20px;
+    margin-top: 20px;
+}

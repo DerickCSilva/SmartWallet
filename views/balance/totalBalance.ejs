@@ -1,0 +1,56 @@
+<%- include ('../partials/head.ejs') %>
+<link rel="stylesheet" href="../../css/monthlyExpenses.css">
+        <div id="header-area">
+            <%- include ('../partials/header.ejs') %>
+            <article>
+                <div id="data" style="margin-left: -215px;">
+                    <h3>Registrar ganhos do PicPay</h3>
+                    <form action="/new/gains" method="post">
+                        <div>
+                            <label for="gains">Ganhos:</label>
+                            <input style="padding-left: 10px;" type="number" name="gains" id="gains" step=".01" placeholder="Apenas números" required>
+                            <input type="submit" value="Registrar">
+                        </div>
+                    </form>
+                </div>
+            </article>
+            <div style="clear: both;"></div>
+            <!-- Start Spent Area monthlyExpenses.css -->
+                <article id="spent-area">
+                    <% if (noContent) { %>
+                        <h2 style="padding-top: 100px ;margin-bottom: 176px;">Sem registros de Saldo</h2>
+                    <% } else { %>
+                        <h2>Registros do meu dinheiro</h2>
+                        <article>
+                            <section>
+                                <h3>O que eu posso usar</h3>
+                                <span><%= formatMoney(valueForUse) %></span>
+                            </section>
+                            <section>
+                                <h3>Dinheiro Guardado</h3>
+                                <span><%= formatMoney(moneySaved) %></span>
+                            </section>
+                            <section>
+                                <h3>Total <br> Investido</h3>
+                                <span><%= formatMoney(totalInvested) %></span>
+                            </section>
+                            <a target="_blank" href="https://www.google.com/search?q=<%= query %>" style="text-decoration: none; color: black;">
+                                <section>
+                                    <h3>Lucro <br> PicPay</h3>
+                                    <span><%= formatMoney(values) %></span>
+                                </section>
+                            </a>
+                            <section>
+                                <h3>Vale <br> Refeição</h3>
+                                <span><%= formatMoney(mealTicket) %></span>
+                            </section>
+                        </article>
+                        <div>
+                            <h2>Saldo Total</h2>
+                            <span><%= formatMoney(valueForUse + moneySaved + totalInvested + values) %></span>
+                        </div>
+                    <% } %>
+                </article>
+            <!-- End Spent Area -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

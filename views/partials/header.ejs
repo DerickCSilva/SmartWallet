@@ -1,0 +1,46 @@
+
+            <header>
+                <a href="/page/1"><img src="/img/logo.png" alt="SmartWallet"></a>
+                <nav id="nav-header">
+                    <ul id="options-header">
+                        <li class="left-border">
+                            <a href="/total/balance">
+                                <i class="fas fa-receipt"></i>
+                                Saldo Total
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/monthlyExpenses">
+                                <i class="fas fa-coins right"></i>
+                                Gastos Mensais
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/investments">
+                                <i class="fas fa-chart-line right"></i>
+                                Investimentos
+                            </a>
+                        </li>
+                        <li onmouseover="ocultNews(document.getElementById('news'))">
+                            <a href="/wishlist/page/1">
+                                <i class="fas fa-shopping-cart right"></i>
+                                Lista de desejos
+                            </a>
+                        </li>
+                        <li class="right-border" onmouseover="showNews(document.getElementById('news'))">
+                            <a href="#">
+                                <i class="far fa-plus-square right"></i>
+                                Novos
+                            </a>
+                        </li>
+                    </ul>
+                    <nav id="news" onmouseout="ocultNews(this)">
+                        <ul onmouseover="showNews(document.getElementById('news'))">
+                            <!-- <li>Selecione abaixo:</li>  -->
+                            <li><a href="/new/category">Nova Categoria</a></li>
+                            <li><a href="/new/item">Novo Item</a></li>
+                            <li><a href="/new/record">Novo Registro</a></li>
+                        </ul>
+                    </nav>
+                </nav>
+            </header>

@@ -1,0 +1,166 @@
+<%- include ('./partials/head.ejs') %>
+    <div id="header-area">
+        <%- include ('./partials/header.ejs') %>
+            <article>
+                <div id="data">
+                    <h3>Consultar por data</h3>
+                    <form action="/page/1" method="post">
+                        <div>
+                            <label for="initial_date" class="space-right">De:</label>
+                            <% if(startMonth) { %>
+                                <input type="date" name="initial_date" id="initial_date" value="<%= startMonth %>" required>
+                            <% } else { %>
+                                <input type="date" name="initial_date" id="initial_date" value="<%= initial_date %>" required>
+                            <% } %>
+                        </div>
+                        <div>
+                            <label for="final_date">Até:</label>
+                            <% if(endMonth) { %>
+                                <input type="date" name="final_date" id="final_date" value="<%= endMonth %>" required>
+                            <% } else { %>
+                                <input type="date" name="final_date" id="final_date" value="<%= final_date %>" required>
+                            <% } %>
+                            <input id="sub" type="submit" value="Buscar">
+                        </div>
+                        <div>
+                            <label id="title" for="group">Agrupar por <b style="text-decoration: underline;">item:</b></label>
+                            <input type="radio" name="agroup" value="yes" id="group" required>
+                            <label for="group">Sim</label>
+                            <input style="margin-left: 10px;" type="radio" name="agroup" value="no" id="agroup" checked>
+                            <label for="agroup">Não</label>
+                        </div>
+                    </form>
+                </div>
+                <div id="showDate">
+                    <% if (startMonth) { %>
+                        De <b><%= formatDate(startMonth) %></b> à <b><%= formatDate(endMonth) %></b>
+                    <% } else { %>
+                        De <b><%= formatDate(initial_date) %></b> à <b><%= formatDate(final_date) %></b>
+                    <% } %>
+                </div>
+            </article>
+            <div style="clear: both;"></div>
+            <article id="total-area">
+                <aside>
+                    <% if(msg) { %>
+                        <section>
+                            <h3>Nenhuma categoria registrada</h3>
+                        </section>
+                    <% } else { %>
+                        <% categories.forEach(category=> { %>
+                            <section>
+                                <h3>Total <%= category.name %></h3>
+                                <% if(category.type == 'gastos') { %>
+                                    <span class="red"><%= values[category.id - 1] %></span>
+                                <% } else { %>
+                                    <span class="green"><%= values[category.id - 1] %></span>
+                                <% } %>
+                            </section>
+                        <% }); %>
+                    <% } %>
+                </aside>
+                <div id="table-area">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Categoria</th>
+                            <th>Item</th>
+                            <th>Valor</th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                        <% if(msg) { %>
+                            <tr>
+                                <td colspan="7" class="no-record">
+                                    Sem registros nessa data, faça seu primeiro registro clicando <a id="here" href="/new/record">aqui</a>!
+                                </td>
+                            </tr>
+                        <% } else { %>
+                            <% if(allRecordsByItem) { %>
+                                <% allRecordsByItem.forEach(record=> { %>
+                                    <tr>
+                                        <td><%= record.id %></td>
+                                        <td class="category"><%= record.category.name %></td>
+                                        <td><%= record.item %></td>
+                                        <% if(record.category.type == 'gastos') { %>
+                                            <td class="red"><%= formatMoney(record.value) %></td>
+                                        <% } else { %>
+                                            <td class="green"><%= formatMoney(record.value) %></td>
+                                        <% } %>
+                                        <td>Total <%= record.item %></td>
+                                        <td><%= formatDate(record.date) %></td>
+                                        <td>
+                                            <a style="opacity: 0.4;" class="edit">Editar</a>
+                                            <a style="opacity: 0.4;" class="delete">Deletar</a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <% allRecords.forEach(record=> { %>
+                                    <tr>
+                                        <td><%= record.id %></td>
+                                        <td class="category"><%= record.category.name%></td>
+                                        <td><%= record.item %></td>
+                                        <% if(record.category.type == 'gastos') { %>
+                                            <td class="red"><%= formatMoney(record.value) %></td>
+                                        <% } else { %>
+                                            <td class="green"><%= formatMoney(record.value) %></td>
+                                        <% } %>
+                                        <td><%= record.desc %></td>
+                                        <td><%= formatDate(record.date) %></td>
+                                        <td>
+                                            <a href="/edit/record/<%= record.id %>" class="edit">Editar</a>
+                                            <form method="post" action="/delete/record" style="display: inline;" onsubmit="confirmDeletion(event, this)">
+                                                <input type="hidden" name="id" value="<%= record.id %>">
+                                                <input type="submit" class="delete" value="Deletar">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } %>
+                        <% } %>
+                    </table>
+                    <div class="pagination">
+                        <% if(num > 1) { %>
+                            <% if(agroup == 'yes') { %>
+                                <form id="form" action="/page/<%= num - 1 %>" method="post">
+                                    <input hidden type="date" name="initial_date" id="initial_date" value="<%= initial_date %>">
+                                    <input hidden type="date" name="final_date" id="final_date"  value="<%= final_date %>">
+                                    <input hidden type="text" name="agroup" id="agroup" hidden value="<%= agroup %>">
+                                    <input id="sub" style="float: left;" type="submit" value="<<< Anterior">
+                                </form>
+                            <% } else if(post) { %>
+                                <form id="form" action="/page/<%= num - 1 %>" method="post">
+                                    <input hidden type="date" name="initial_date" id="initial_date" value="<%= initial_date %>">
+                                    <input hidden type="date" name="final_date" id="final_date"  value="<%= final_date %>">
+                                    <input id="sub" style="float: left;" type="submit" value="<<< Anterior">
+                                </form>
+                            <% } else { %>
+                                <a style="float: left;" href="/page/<%= num - 1 %>"><<< Anterior</a>
+                            <% } %>
+                        <% } %>
+
+                        <% if(next) { %>
+                            <% if(agroup == 'yes') { %>
+                                <form id="form" action="/page/<%= num + 1 %>" method="post">
+                                    <input hidden type="date" name="initial_date" id="initial_date" value="<%= initial_date %>">
+                                    <input hidden type="date" name="final_date" id="final_date"  value="<%= final_date %>">
+                                    <input hidden type="text" name="agroup" id="agroup" hidden value="<%= agroup %>">
+                                    <input id="sub" style="float: right;" type="submit" value="Próximo >>>">
+                                </form>
+                            <% } else if(post) { %>
+                                <form id="form" action="/page/<%= num + 1 %>" method="post">
+                                    <input hidden type="date" name="initial_date" id="initial_date" value="<%= initial_date %>">
+                                    <input hidden type="date" name="final_date" id="final_date"  value="<%= final_date %>">
+                                    <input id="sub" style="float: right;" type="submit" value="Próximo >>>">
+                                </form>
+                            <% } else { %>
+                                <a style="float: right;" href="/page/<%= num + 1 %>">Próximo >>></a>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </article>
+    </div>
+    <%- include ('./partials/footer.ejs') %>

@@ -1,0 +1,31 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area" style="margin-bottom: 76px">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start Investment Edition -->
+            <article>
+                <section>
+                    <h2>Editar percentual</h2>
+                    <form action="/update/percent" method="post">
+                        <input type="hidden" name="id" id="id" value="<%= percent.id %>">
+                        <label for="investment">Nome:</label>
+                        <select id="investment" name="investment" required>
+                            <option disabled selected value="">Selecione abaixo</option>
+                            <% investments.forEach(investment => { %>
+                                <% if (investment.id == percent.investment.id) { %>
+                                    <option selected value="<%= investment.id %>"><%= investment.name %></option>
+                                <% } else { %>
+                                    <option value="<%= investment.id %>"><%= investment.name %></option>
+                                <% } %>                                
+                            <% }); %>
+                        </select>
+                        <label for="date">Mês:</label> 
+                        <input type="month" name="date" id="date" value="<%= percent.date %>"> <!-- CSS: investment.css -->
+                        <label for="percent">Porcentagem:</label>
+                        <input type="number" min="1" max="100" id="percent" placeholder="Apenas o número" name="percent" value="<%= percent.percent %>">
+                        <input type="submit" value="Editar">
+                    </form>
+                </section>
+            </article>
+            <!-- Start Investment Edition -->
+        </div>
+        <%- include ('../partials/footer.ejs') %>

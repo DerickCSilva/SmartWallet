@@ -1,0 +1,87 @@
+<%- include ('../partials/head.ejs') %>
+        <div id="header-area">
+            <%- include ('../partials/header.ejs') %>
+            <!-- Start select#buttons CSS: investment.css -->
+            <section id="buttons">
+                <a href="/new/wish">Novo item na lista</a>
+            </section>
+            <!-- Fim select#buttons CSS: investment.css -->
+            
+            <!-- Start article#total-area CSS: style.css -->
+            <article id="total-area" style="width: 100%; margin-bottom: 15px;">
+                <aside>
+                    <section style="margin: 0;">
+                        <h3>Total gasto nos Itens</h3>
+                        <% if (noContent) { %>
+                            <span class="green">R$ 0,00</span>
+                        <% } else { %>
+                            <span class="green"><%= formatMoney(value) %></span>
+                        <% } %>
+                    </section>
+                </aside>
+                <div id="table-area" style="flex-grow: 12;">
+                    <table>
+                        <tr>
+                            <th>Situação</th>
+                            <th>Grau</th>
+                            <th>Item</th>
+                            <th>Valor</th>
+                            <th>Loja</th>
+                            <th>Ações</th>
+                        </tr>
+                        <% if (noContent) { %>
+                            <tr>
+                                <td colspan="7" class="no-record">
+                                    Sem itens desejados registrados, faça seu primeiro registro clicando <a id="here" href="/new/wish">aqui</a>!
+                                </td>
+                            </tr>
+                        <% } else { %>
+                            <% allWishes.forEach(wish => { %>
+                                <tr>
+                                    <% if(wish.situation === 'adquirido') { %>
+                                        <td class="lightgreen" style="text-transform: capitalize;"><%= wish.situation %></td>
+                                        <td class="lightgreen"><%= wish.degree %></td>
+                                    <% } else { %>
+                                        <td class="red" style="text-transform: capitalize;"><%= wish.situation %></td>
+                                        <td class="red"><%= wish.degree %></td>
+                                    <% } %>
+                                    <td><%= wish.item %></td>
+                                    <% if (wish.value) { %>
+                                        <td><%= formatMoney(wish.value) %></td>
+                                    <% } else { %>
+                                        <td><i>-</i></td>
+                                    <% } %>
+                                    <% if (wish.store) { %>
+                                        <td><%= wish.store %></td>
+                                    <% } else { %>
+                                        <td><i>-</i></td>
+                                    <% } %>
+                                    <td>
+                                        <a class="edit" href="/edit/wish/<%= wish.id %>">Editar</a>
+                                        <form method="post" action="/delete/wish" style="display: inline;" onsubmit="confirmDeletion(event, this)">
+                                            <input type="hidden" name="id" value="<%= wish.id %>">
+                                            <input type="submit" class="delete" value="Deletar">
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                    </table>
+                </div>
+            </article>
+            <!-- Fim article#total-area CSS: style.css -->
+            <div class="pagination" style="width: 80%; margin: 0 0 143px 235px;">
+                <% if(num > 1) { %>
+                    <form id="form" action="/wishlist/page/<%= num - 1 %>" method="get">
+                        <input id="sub" style="float: left;" type="submit" value="<<< Anterior">
+                    </form>
+                <% } %>
+
+                <% if(next) { %>
+                    <form id="form" action="/wishlist/page/<%= num + 1 %>" method="get">
+                        <input id="sub" style="float: right;" type="submit" value="Próximo >>>">
+                    </form>
+                <% } %>
+            </div>
+        </div>
+        <%- include ('../partials/footer.ejs') %>

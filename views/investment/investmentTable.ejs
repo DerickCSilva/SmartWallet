@@ -1,0 +1,101 @@
+<%- include ('../partials/head.ejs') %>
+    <div id="header-area">
+        <%- include ('../partials/header.ejs') %>
+            <!-- Start selection#form CSS: investment.css -->
+            <section id="buttons">
+                <a href="/new/investment">Criar um investimento</a>
+                <a href="/new/percent">Registrar porcentagem</a>
+                <a href="/investments">Total investido</a>
+            </section>
+            <section id="form">
+                <h3>Consultar por Mês</h3>
+                <form action="/view/investment" method="post">
+                    <div>
+                        <label for="month">Mês:</label>
+                        <% if(startMonth) { %>
+                            <input type="month" name="month" id="month" value="<%= startMonth %>" required>
+                        <% } else { %>
+                            <input type="month" name="month" id="month" value="<%= month %>" required>
+                        <% } %>
+                        <input type="submit" value="Buscar">
+                    </div>
+                </form>
+            </section>
+            <!-- Fim selection#form CSS: investment.css -->
+            <div style="clear: both;"></div>
+            <article id="total-area" style="width: 100%;">
+                <aside>
+                    <section>
+                        <h3>Porcentagem relacionada ao mês de</h3>
+                        <span class="green"><%= monthString %></span>
+                    </section>
+                </aside>
+                <div id="table-area" style="flex-grow: 12; margin-bottom: 70px;">
+                    <table>
+                        <tr>
+                            <th>Mês</th>
+                            <th>Nome</th>
+                            <th>Porcentagem</th>
+                            <th>Ações</th>
+                        </tr>
+                        <% if(noRegisters) { %>
+                            <tr>
+                                <td colspan="4" class="no-record">
+                                    Sem registros de percentuais nessa data, faça seu primeiro registro clicando <a id="here" href="/new/percent">aqui</a>!
+                                </td>
+                            </tr>
+                        <% } else { %>
+                            <% percents.forEach(percent=> { %>
+                                <tr>
+                                    <td><%= monthString %></td>
+                                    <td><%= percent.investment.name %></td>
+                                    <td><%= percent.percent %>%</td>
+                                    <td>
+                                        <a href="/edit/percent/<%= percent.id %>" class="edit">Editar</a>
+                                        <form method="post" action="/delete/percent" style="display: inline;"
+                                            onsubmit="confirmDeletion(event, this)">
+                                            <input type="hidden" name="id" value="<%= percent.id %>">
+                                            <input type="submit" class="delete" value="Deletar">
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                    </table>
+                    <div style="padding: 20px; background-color: #5858FA; margin: 10px 0;">
+                        <h3 style="text-align: center;">Nome dos investimentos</h3>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                        <% if(noRegisters) { %>
+                            <tr>
+                                <td colspan="4" class="no-record">
+                                    Sem registros de investimentos, crie o seu primeiro investimento clicando <a id="here" href="/new/investment">aqui</a>!
+                                </td>
+                            </tr>
+                        <% } else { %>
+                            <% investments.forEach(investment => { %>
+                                <tr>
+                                    <td><%= investment.name %></td>
+                                    <td>
+                                        <a href="/edit/investment/<%= investment.id %>" class="edit">Editar</a>
+                                        <form method="post" action="/delete/investment" style="display: inline;"
+                                            onsubmit="confirmDeletion(event, this)">
+                                            <input type="hidden" name="id" value="<%= investment.id %>">
+                                            <input type="submit" class="delete" value="Deletar">
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                    </table>
+                    <% if(noRegisters) { %>
+                        <div style="margin-bottom: 147px;"></div>
+                    <% } %>
+                </div>
+            </article>
+    </div>
+    <%- include ('../partials/footer.ejs') %>
